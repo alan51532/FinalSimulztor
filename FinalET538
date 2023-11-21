@@ -1,0 +1,890 @@
+
+from kivy.config import Config
+Config.set('graphics', 'resizable', 'False')   
+
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+from kivy.core.window import Window
+from kivy.core.audio import SoundLoader
+from kivy.clock import Clock
+from kivy.uix.popup import Popup
+from kivy.uix.image import Image
+from kivy.uix.floatlayout import FloatLayout
+import random
+import time
+from sounddevice import play
+import tkinter as tk
+
+
+root = tk.Tk()
+root.withdraw()
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+ 
+
+if screen_width == 1360 and  screen_height == 768:
+  Window.size = (602.409, 500 )
+elif screen_width == 1366 and  screen_height == 768:
+  Window.size = (602.409, 500 )
+elif screen_width == 1400 and  screen_height == 1050:
+  Window.size = (475, 395 )
+elif screen_width == 1440 and  screen_height == 900:
+  Window.size = (500, 400 )  
+elif screen_width == 1600 and  screen_height == 900:
+  Window.size = (500, 400 )  
+elif screen_width == 1680 and  screen_height == 1050:
+  Window.size = (505, 405 )  
+elif screen_width == 1920 and  screen_height == 1080:
+  Window.size = (500, 400 )
+elif screen_width == 1280 and  screen_height == 1024:
+  Window.size = (590, 490 )
+elif screen_width == 1280 and  screen_height == 960:
+  Window.size = (500, 400 )
+elif screen_width == 1280 and  screen_height == 800:
+  Window.size =( 570, 470 )  
+elif screen_width == 1280 and  screen_height == 768:
+  Window.size = (570, 480 )  
+elif screen_width == 1280 and  screen_height == 720:
+  Window.size = (700, 600 )
+  
+elif screen_width == 800 and  screen_height == 600:
+  Window.size = (720, 620 )  
+Window.clearcolor = (23/255, 65/255, 112/255, 1)
+Window.title = "спонсор разработки https://stoptut.ru/"
+
+
+
+class MyKivyApp(App):
+    def __init__(self, **kwargs):
+         super(MyKivyApp, self).__init__(**kwargs)
+         self.radio_enabled = False  # добавлено
+         self.current_frequency = 0
+
+       
+
+    def start_indicator_blink(self):
+        if hasattr(self, 'event'):  # Проверка существования атрибута
+            Clock.unschedule(self.event) 
+        self.event = Clock.schedule_interval(self.blink, 0.5)  # Blink every 1 second
+
+    def stop_indicator_blink(self, *args):
+        
+       
+        Clock.unschedule(self.event)  
+        self.img_indicator.source = './indi2.png'  
+
+    def blink(self, *args):  
+        if self.img_indicator.source == './indi2.png':
+            self.img_indicator.source = './indi.png'
+        else:
+            self.img_indicator.source = './indi2.png'
+
+    def on_button_click(self, instance):
+    
+     if not self.radio_enabled:
+        self.radio_enabled = True
+        self.sound1 = SoundLoader.load('./Rec01.wav')
+        self.sound1.play()
+        self.sound1.bind(on_stop=lambda *args: self.chast1(instance)) ## когда остановиться 2_2
+         
+  
+     else: 
+        self.sound.stop()  
+        self.img.source = './s0.png'
+        self.stop_indicator_blink()
+        Clock.unschedule(self.spam)
+        if hasattr(self, 'sound1_1'):
+            self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+            self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+            self.sound1_3.stop()    
+        if hasattr(self, 'sound1_4'):
+            self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+            self.sound1_5.stop()
+        if hasattr(self, 'sound44'):
+            self.sound44.stop()
+        if hasattr(self, 'sound55'):
+            self.sound55.stop()
+        if hasattr(self, 'sound66'):
+            self.sound66.stop()           
+        if hasattr(self, 'sound62'):
+            self.sound62.stop()
+        if hasattr(self, 'sound7'):
+            self.sound7.stop()
+        if hasattr(self, 'sound8'):
+            self.sound8.stop()
+        if hasattr(self, 'sound9'):
+            self.sound9.stop()
+        if hasattr(self, 'sound10'):
+            self.sound10.stop()
+        if hasattr(self, 'sound11_1'):
+            self.sound11_1.stop()           
+        if hasattr(self, 'sound12_1'):
+            self.sound12_1.stop()
+        if hasattr(self, 'sound13_1'):
+            self.sound13_1.stop()
+        if hasattr(self, 'sound14_1'):
+            self.sound14_1.stop()
+        if hasattr(self, 'sound15_1'):
+            self.sound15_1.stop()
+        if hasattr(self, 'sound16_1'):
+            self.sound16_1.stop()
+        if hasattr(self, 'random_sound'):
+            self.random_sound.stop()   
+        if hasattr(self, 'soundpom'):
+            self.soundpom.stop()
+            
+        self.current_frequency = 0
+        self.radio_enabled = False      
+        self.stop_spam = True #########################################
+
+    def on_button_click2(self, instance):
+
+        if not self.radio_enabled:  
+            return
+        
+        self.current_frequency += 1
+        
+        if self.current_frequency == 1:
+             self.chast2(instance)
+        elif self.current_frequency == 2:
+             self.chast3(instance)
+        elif self.current_frequency == 3:
+             self.chast4(instance)
+        elif self.current_frequency == 4:
+             self.chast5(instance) 
+        elif self.current_frequency == 5:
+             self.chast6(instance) 
+        elif self.current_frequency == 6:
+             self.chast7(instance)
+        elif self.current_frequency == 7:
+             self.chast8(instance)
+        elif self.current_frequency == 8:
+             self.chast9(instance)
+        elif self.current_frequency == 9:
+             self.chast10(instance)
+        elif self.current_frequency == 10:
+             self.chast11(instance) 
+        elif self.current_frequency == 11:
+             self.chast12(instance) 
+        elif self.current_frequency == 12:
+             self.chast13(instance) 
+        elif self.current_frequency == 13:
+             self.chast14(instance) 
+        elif self.current_frequency == 14:
+             self.chast15(instance) 
+        elif self.current_frequency == 15:
+             self.chast16(instance)
+        elif self.current_frequency == 16:
+             self.chast1(instance)
+
+    def spam(self, *args):
+         
+
+        if not self.stop_spam:
+
+
+            x = {1:'./an2.mp3', 2:'./pirat.mp3',3:'./pirat5.mp3', 4:'./pirat20.mp3', 5:'./sos.mp3', 6:'./sos2.mp3', 7:'./sos3.mp3', 8:'./ne2.mp3', 9:'./ne3.mp3', 10:'./ne10.mp3',
+                 11:'./sp0.mp3', 12:'./sp1.mp3', 13:'./sp3.mp3', 14:'./sp3.mp3', 15:'./pom2.mp3', 16:'./sp6.mp3', 17:'./sp7.mp3', 18:'./sp8.mp3', 19:'./sp9.mp3', 20:'./sp10.mp3', 21:'./sp11', 22:'./sp12.mp3',
+                 23:'./sp14.mp3', 24:'./sp15.mp3', 25:'./sp16.mp3', 26:'./sp17.mp3', 27:'./sp18.mp3', 28:'./ZAIR.mp3', 29:'./f1.mp3', 30:'./f2.mp3', 31:'./f3.mp3', 32:'./f4.mp3', 33:'./f5.mp3', 34:'./f9.mp3',
+                 35:'f6.mp3', 36:'./f7.mp3', 37:'./f8.mp3', 38:'./f9.mp3', 39:'./f10.mp3', 40:'./f11.mp3', 41:'./f12.mp3', 42:'./f13.mp3', 43:'./f14.mp3', 44:'./f15.mp3', 45:'./f16.mp3',
+                 46:'./f17.mp3', 47:'./o1.mp3', 48:'./o2.mp3', 49:'o3.mp3./', 50:'./o4.mp3', 51:'./o5.mp3', 52:'./o6.mp3', 53:'./o7.mp3', 54:'./o8.mp3', 55:'./o9.mp3', 56:'./o10.mp3', 57:'./o11.mp3',
+                 58:'./o12.mp3', 59:'./o13.mp3', 60:'./o14.mp3', 61:'./o15.mp3', 62:'./o16.mp3', 63:'./o17.mp3', 64:'./o18.mp3', 65:'./o19.mp3', 66:'./o20.mp3', 67:'./okr1.mp3',
+                 68:'./okr2.mp3', 69:'./okr3.mp3', 70:'./okr4.mp3', 71:'./real1.mp3', 72:'./real2.mp3', 73:'./real3.mp3', 74:'./real4.mp3', 75:'./real5.mp3', 76:'./real6.mp3', 77:'./real7.mp3', 78:'./sud1.mp3',
+                 79:'./sud2.mp3', 80:'./sud3.mp3',  81:'./sud4.mp3',  82:'./sud5.mp3',  83:'./sud6.mp3',  84:'./sud7.mp3', 85:'./ya1.mp3', 86:'./ya2.mp3', 87:'./ya3.mp3', 88:'./ya4.mp3',
+                 89:'./ya5.mp3', 90:'./ya6.mp3', 91:'./ya7.mp3', 92:'./poezd5.mp3', 93:'./poezd5.mp3', 93:'./MW6.mp3', 94:'./MW7.mp3', 95:'./MW6.mp3', 96:'./MW10.mp3', 97:'./MW7.mp3'}
+            key = random.choice(list(x.keys()))
+            audio_path = x[key]
+            self.sound999 = SoundLoader.load(audio_path)          
+            self.sound999.play()            
+            
+            self.start_indicator_blink()
+            audio_duration = self.sound999.length        
+            Clock.schedule_once(self.stop_indicator_blink, audio_duration)
+            
+            
+
+    def play_random_audio(self):
+        self.random_sound = random.choice([self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5])
+        self.random_sound.play()
+        self.start_indicator_blink()
+        audio_duration = self.random_sound.length        
+        Clock.schedule_once(self.stop_indicator_blink, audio_duration)
+        
+        
+        
+    
+        
+        
+    def chast1(self, instance):
+        
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        
+       
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound16'):
+         self.sound16.stop()
+        if hasattr(self, 'sound16_1'):
+         self.sound16_1.stop()
+       
+
+        
+         
+        self.img.source = './s1.png'    
+        self.sound1_0 = SoundLoader.load('./1.wav')       
+        self.sound1_0.play()    
+ 
+        self.sound1_1 = SoundLoader.load('./re.mp3')
+        self.sound1_2 = SoundLoader.load('./re0.mp3')
+        self.sound1_3 = SoundLoader.load('./re2.mp3')
+        self.sound1_4 = SoundLoader.load('./re3.mp3')
+        self.sound1_5 = SoundLoader.load('./re5.mp3')
+        af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+        random.shuffle(af)## перемешиваем
+        self.sound1_1 = af[0]## заново ложим
+        self.sound1_2 = af[1]
+        self.sound1_3 = af[2]
+        self.sound1_4 = af[3]
+        self.sound1_5 = af[4]
+        self.sound1_0.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+        self.sound1_1.bind(on_stop=lambda *args: self.soundpom.play())
+        self.sound1_2.bind(on_stop=lambda *args: self.soundpom.play())
+        self.sound1_3.bind(on_stop=lambda *args: self.soundpom.play())
+        self.sound1_4.bind(on_stop=lambda *args: self.soundpom.play())
+        self.sound1_5.bind(on_stop=lambda *args: self.soundpom.play())
+        self.current_frequency = 0
+        self.radio_enabled = True 
+        self.stop_spam = False
+
+
+
+        Clock.schedule_interval(self.spam, 25)
+
+
+
+    def chast2(self, instance):
+        self.stop_indicator_blink()
+        
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+
+        self.img.source = 's2.png'
+        self.sound2_0 = SoundLoader.load('2.wav')
+        self.sound2_0.play()
+        
+        self.sound1_1 = SoundLoader.load('./ne0.mp3')
+        self.sound1_2 = SoundLoader.load('./ne1.mp3')
+        self.sound1_3 = SoundLoader.load('./ne2.mp3')
+        self.sound1_4 = SoundLoader.load('./ne10.mp3/')
+        self.sound1_5 = SoundLoader.load('./ne4.mp3')        
+        af = [self.sound1_1, self.sound1_2, self.sound1_3,  self.sound1_4, self.sound1_5] 
+        random.shuffle(af)
+        self.sound1_1 = af[0]
+        self.sound1_2 = af[1]
+        self.sound1_3 = af[2]
+        self.sound1_4 = af[3]
+        self.sound1_5 = af[4]
+        
+        self.stop_spam = False
+        self.sound2_0.bind(on_stop=lambda *args: self.play_random_audio())      
+
+        
+        
+        
+        Clock.schedule_interval(self.spam, 25)
+
+       
+    def chast3(self, instance):
+        self.stop_indicator_blink()
+        self.stop_spam = True
+        
+        Clock.unschedule(self.spam)
+    
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+                 
+        self.img.source = './s3.png'       
+        self.sound3 = SoundLoader.load('./3.wav')        
+        self.sound3.play()
+                    
+        
+        self.sound1_1 = SoundLoader.load('./re8.mp3')
+        self.sound1_2 = SoundLoader.load('./re6.mp3')
+        self.sound1_3 = SoundLoader.load('./rt1.mp3')
+        self.sound1_4 = SoundLoader.load('./rt2.mp3')
+        self.sound1_5 = SoundLoader.load('./sp1.mp3')
+        af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+        random.shuffle(af)## перемешиваем
+        self.sound1_1 = af[0]## заново ложим
+        self.sound1_2 = af[1]
+        self.sound1_3 = af[2]
+        self.sound1_4 = af[3]
+        self.sound1_5 = af[4]
+        self.sound3.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+
+        
+        self.stop_spam = False
+        Clock.schedule_once(self.spam,25)
+        
+    def chast4(self, instance):
+        self.stop_indicator_blink()
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+         
+        self.img.source = './s4.png'
+        self.sound4 = SoundLoader.load('./4.wav')      
+        self.sound4.play()        
+                
+        self.sound1_1 = SoundLoader.load('./tu153.mp3')
+        self.sound1_2 = SoundLoader.load('./tu154.mp3')
+        self.sound1_3 = SoundLoader.load('./tu155.mp3')
+        self.sound1_4 = SoundLoader.load('./tu156.mp3')
+        self.sound1_5 = SoundLoader.load('./tu154.mp3')
+        af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+        random.shuffle(af)## перемешиваем
+        self.sound1_1 = af[0]## заново ложим
+        self.sound1_2 = af[1]
+        self.sound1_3 = af[2]
+        self.sound1_4 = af[3]
+        self.sound1_5 = af[4]
+        self.sound4.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+            
+
+        self.stop_spam = False
+
+        Clock.schedule_once(self.spam, 20)
+
+    def chast5(self, instance):
+        self.stop_indicator_blink()
+        self.stop_spam = True
+        
+        Clock.unschedule(self.spam)
+        
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+         
+         self.img.source = './s5.png'    
+         self.sound5 = SoundLoader.load('./z5.wav')
+         self.sound5.play()
+         self.stop_spam = False
+         Clock.schedule_once(self.spam, 3)
+         
+ 
+         
+                          
+         
+    def chast6(self, instance):
+        self.stop_indicator_blink()
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound5'):
+         self.sound5.stop()
+        if hasattr(self, 'sound55'):
+         self.sound55.stop()
+##
+##        if hasattr(self, 'sound1_5'):
+##         self.sound1_5.stop()
+         
+        self.img.source = './s6.png'    
+        self.sound6 = SoundLoader.load('./6.wav')
+        self.sound6.play()
+         
+         
+        self.sound1_1 = SoundLoader.load('./poezd1.mp3')
+        self.sound1_2 = SoundLoader.load('./poezd2.mp3')
+        self.sound1_3 = SoundLoader.load('./poezd3.mp3')
+        self.sound1_4 = SoundLoader.load('./poezd4.mp3')
+        self.sound1_5 = SoundLoader.load('./poezd4.mp3')
+        af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+        random.shuffle(af)## перемешиваем
+        self.sound1_1 = af[0]## заново ложим
+        self.sound1_2 = af[1]
+        self.sound1_3 = af[2]
+        self.sound1_4 = af[3]
+        self.sound1_5 = af[4]
+        self.sound6.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+##         self.sound1_1.bind(on_stop=lambda *args: self.soundpom.play())
+         
+        self.stop_spam = False
+        Clock.schedule_interval(self.spam, 25)
+    
+         
+##         self.radio_enabled = True 
+         
+
+    def chast7(self, instance):
+        self.stop_indicator_blink()
+        Clock.unschedule(self.spam)
+        self.stop_spam = True
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+         
+         self.img.source = './s7.png'    
+         self.sound7 = SoundLoader.load('./7.wav')
+         self.sound7.play()
+         
+         
+         self.sound1_1 = SoundLoader.load('./oxr19.mp3')
+         self.sound1_2 = SoundLoader.load('./oxr.mp3')
+         self.sound1_3 = SoundLoader.load('./oxr12.mp3')
+         self.sound1_4 = SoundLoader.load('./oxr4.mp3')
+         self.sound1_5 = SoundLoader.load('./oxr33.mp3')
+         af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+         random.shuffle(af)## перемешиваем
+         self.sound1_1 = af[0]## заново ложим
+         self.sound1_2 = af[1]
+         self.sound1_3 = af[2]
+         self.sound1_4 = af[3]
+         self.sound1_5 = af[4]
+         self.sound7.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+         self.sound1_1.bind(on_stop=lambda *args: self.soundpom.play())
+         
+         
+         
+         self.stop_spam = False
+         Clock.schedule_once(self.spam, 25)
+    
+         
+##         self.radio_enabled = True 
+         
+         
+    def chast8(self, instance):
+        self.stop_indicator_blink()
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+         
+         self.img.source = './s8.png'    
+         self.sound8 = SoundLoader.load('./8.wav')
+         self.sound8.play()
+
+         
+         
+         
+         self.sound1_1 = SoundLoader.load('./qwe.mp3')
+         self.sound1_2 = SoundLoader.load('./qwe1.mp3')
+         self.sound1_3 = SoundLoader.load('./qwe2.mp3')
+         self.sound1_4 = SoundLoader.load('./qwe3.mp3')
+         self.sound1_5 = SoundLoader.load('./qwe.mp3')
+         af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+         random.shuffle(af)## перемешиваем
+         self.sound1_1 = af[0]## заново ложим
+         self.sound1_2 = af[1]
+         self.sound1_3 = af[2]
+         self.sound1_4 = af[3]
+         self.sound1_5 = af[4]
+         self.sound8.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+         self.sound1_1.bind(on_stop=lambda *args: self.soundpom.play())
+
+         self.stop_spam = False
+    
+         Clock.schedule_interval(self.spam, 25)
+##        Clock.unschedule(self.spam)
+ 
+   
+         
+    def chast9(self, instance):
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        self.stop_indicator_blink()
+        
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+         
+         self.img.source = './s9.png'    
+         self.sound9 = SoundLoader.load('./9.wav')
+         self.sound9.play()
+         
+         
+         self.sound1_1 = SoundLoader.load('./Po1.mp3')
+         self.sound1_2 = SoundLoader.load('./Pol2.mp3')
+         self.sound1_3 = SoundLoader.load('./Pol3.mp3')
+         self.sound1_4 = SoundLoader.load('./Pol4.mp3')
+         self.sound1_5 = SoundLoader.load('./Pol5.mp3')
+         af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+         random.shuffle(af)## перемешиваем
+         self.sound1_1 = af[0]## заново ложим
+         self.sound1_2 = af[1]
+         self.sound1_3 = af[2]
+         self.sound1_4 = af[3]
+         self.sound1_5 = af[4]
+         self.sound9.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+
+       
+         self.stop_spam = False
+         Clock.schedule_interval(self.spam, 25)
+##         Clock.shedule_interval(self.play_random_audio, 20)
+         
+    def chast10(self, instance):
+        self.stop_indicator_blink()
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+         
+         self.img.source = './s10.png'    
+         self.sound10 = SoundLoader.load('./10.wav')
+         self.sound10.play()
+         
+         
+         
+         self.sound10.bind(on_stop=lambda *args: self.soundpom.play())
+         self.start_indicator_blink()
+
+         self.sound1_1 = SoundLoader.load('./MW1.mp3')
+         self.sound1_2 = SoundLoader.load('./MW2.mp3')
+         self.sound1_3 = SoundLoader.load('./MW3.mp3')
+         self.sound1_4 = SoundLoader.load('./MW4.mp3')
+         self.sound1_5 = SoundLoader.load('./MW5.mp3')
+         af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+         random.shuffle(af)## перемешиваем
+         self.sound1_1 = af[0]## заново ложим
+         self.sound1_2 = af[1]
+         self.sound1_3 = af[2]
+         self.sound1_4 = af[3]
+         self.sound1_5 = af[4]
+         self.sound10.bind(on_stop=lambda *args: self.play_random_audio()) 
+
+         self.stop_spam = False
+         Clock.schedule_interval(self.spam, 25)
+         
+    def chast11(self, instance):
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        self.stop_indicator_blink()
+        
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound10'):
+         self.sound10.stop()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()
+        
+         
+         self.img.source = './s11.png'    
+         self.sound11 = SoundLoader.load('./11.wav')
+         self.sound11.play()
+         
+         
+         self.sound11_1 = SoundLoader.load('./MW8.mp3')
+         
+         self.sound11.bind(on_stop=lambda *args: self.sound11_1.play())
+         
+         self.start_indicator_blink()
+         audio_duration = self.sound11_1.length        
+         Clock.schedule_once(self.stop_indicator_blink, audio_duration)
+         
+         self.stop_spam = False
+         Clock.schedule_interval(self.spam, 20)
+         
+    def chast12(self, instance):
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        self.stop_indicator_blink()
+        
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound11'):
+         self.sound11.stop()
+        if hasattr(self, 'sound11_1'):
+         self.sound11_1.stop()
+        
+         
+         self.img.source = './s12.png'    
+         self.sound12 = SoundLoader.load('./12.wav')
+         self.sound12.play()
+         
+         
+         self.sound12_1 = SoundLoader.load('./ya3.mp3')
+         self.sound12.bind(on_stop=lambda *args: self.sound12_1.play())
+         
+         self.start_indicator_blink()
+         audio_duration = self.sound12_1.length        
+         Clock.schedule_once(self.stop_indicator_blink, audio_duration)
+         
+         self.stop_spam = False
+         Clock.schedule_interval(self.spam, 25)
+         
+    def chast13(self, instance):
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        self.stop_indicator_blink()
+        
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound12'):
+         self.sound12.stop()
+        if hasattr(self, 'sound12_1'):
+         self.sound12_1.stop()
+
+         
+         self.img.source = './s13.png'    
+         self.sound13 = SoundLoader.load('./13.wav')
+         self.sound13.play()
+         
+         
+        
+         self.sound13_1 = SoundLoader.load('./MW77.mp3')
+         self.sound13.bind(on_stop=lambda *args: self.sound13_1.play())
+         
+         self.start_indicator_blink()
+         audio_duration = self.sound13_1.length        
+         Clock.schedule_once(self.stop_indicator_blink, audio_duration)
+
+    
+         self.stop_spam = False
+         Clock.schedule_interval(self.spam, 25)
+         
+    def chast14(self, instance):
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        self.stop_indicator_blink()
+        
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound13'):
+         self.sound13.stop()
+        if hasattr(self, 'sound13_1'):
+         self.sound13_1.stop()
+
+        
+         
+         self.img.source = './s14.png'    
+         self.sound14 = SoundLoader.load('./14.wav')
+         self.sound14.play()
+         
+         
+         self.sound14_1 = SoundLoader.load('./MW12.mp3')
+         self.sound14.bind(on_stop=lambda *args: self.sound14_1.play())
+    
+         self.start_indicator_blink()
+         audio_duration = self.sound14_1.length        
+         Clock.schedule_once(self.stop_indicator_blink, audio_duration)
+
+         self.stop_spam = False
+         Clock.schedule_interval(self.spam, 25)
+         
+        
+    def chast15(self, instance):
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        self.stop_indicator_blink()
+        
+        if hasattr(self, 'sound999'):
+         self.sound999.stop()
+        if hasattr(self, 'sound14'):
+         self.sound14.stop()
+        if hasattr(self, 'sound14_1'):
+         self.sound14_1.stop()
+      
+         
+         self.img.source = './s15.png'    
+         self.sound15 = SoundLoader.load('./15.wav')
+         self.sound15.play()
+         
+       
+ 
+         
+         self.sound1_1 = SoundLoader.load('./rp1.mp3')
+         self.sound1_2 = SoundLoader.load('./rp2.mp3')
+         self.sound1_3 = SoundLoader.load('./rp3.mp3')
+         self.sound1_4 = SoundLoader.load('./rp4.mp3')
+         self.sound1_5 = SoundLoader.load('./rp5.mp3')
+         af = [self.sound1_1, self.sound1_2, self.sound1_3, self.sound1_4, self.sound1_5]## ложим 
+         random.shuffle(af)## перемешиваем
+         self.sound1_1 = af[0]## заново ложим
+         self.sound1_2 = af[1]
+         self.sound1_3 = af[2]
+         self.sound1_4 = af[3]
+         self.sound1_5 = af[4]
+         self.sound15.bind(on_stop=lambda *args: self.play_random_audio()) ## когда остановиться 2_2
+         self.sound1_1.bind(on_stop=lambda *args: self.soundpom.play())
+         self.sound1_2.bind(on_stop=lambda *args: self.soundpom.play())
+         self.sound1_4.bind(on_stop=lambda *args: self.soundpom.play())
+
+    
+         
+
+         self.stop_spam = False
+         Clock.schedule_once(self.spam, 20)
+         
+    def chast16(self, instance):
+        self.stop_spam = True
+        Clock.unschedule(self.spam)
+        self.stop_indicator_blink()
+        if hasattr(self, 'sound1_1'):
+         self.sound1_1.stop()
+        if hasattr(self, 'sound1_2'):
+         self.sound1_2.stop()
+        if hasattr(self, 'sound1_3'):
+         self.sound1_3.stop()
+        if hasattr(self, 'sound1_4'):
+         self.sound1_4.stop()
+        if hasattr(self, 'sound1_5'):
+         self.sound1_5.stop()       
+        if hasattr(self, 'sound15'):
+         self.sound15.stop()
+         
+         self.img.source = './s16.png'    
+         self.sound16 = SoundLoader.load('./16.wav')
+         self.sound16.play()
+         
+         
+         self.sound16_1 = SoundLoader.load('./MW10.mp3')
+         self.sound16.bind(on_stop=lambda *args: self.sound16_1.play())
+         self.start_indicator_blink()
+         audio_duration = self.sound16_1.length        
+         Clock.schedule_once(self.stop_indicator_blink, audio_duration)
+##         self.sound1_1.bind(on_stop=lambda *args: self.soundpom.play())
+
+         self.sound16_1.bind(on_stop=lambda *args: self.soundpom.play())
+         
+
+    
+         
+
+         self.stop_spam = False
+         Clock.schedule_once(self.spam, 25)
+         
+   
+######################################################        
+        
+    def build(self):
+
+        
+        
+        layout = FloatLayout()
+        self.img = Image(source='./s0.png')
+        layout.add_widget(self.img)
+
+        radio_button = Button(text="",
+                              pos_hint={'x': 0.538, 'y': 0.664},
+                              size_hint=(0.037, 0.065), background_color=(1, 1, 1, 0))
+        radio_button.bind(on_press=self.on_button_click)
+        layout.add_widget(radio_button)
+
+        radio_button2 = Button(text="",
+                              pos_hint={'x': 0.490, 'y': 0.676},
+                              size_hint=(0.039, 0.069), background_color=(1, 1, 1, 0))
+        radio_button2.bind(on_press=self.on_button_click2)
+        layout.add_widget(radio_button2)
+
+        self.img_indicator = Image(pos_hint={'x': 0.379, 'y': 0.30}, 
+                           size_hint=(0.25, 0.09), 
+                           source='indi2.png')
+        layout.add_widget(self.img_indicator)
+        
+
+        self.sound = SoundLoader.load('./spa.wav')
+        self.sound.play()
+
+        self.soundpom = SoundLoader.load('./pom.wav')
+        label8 = Label(text='Спонсор разработки сайт "Цифра и Аналог" ',  pos_hint={'x': 0.37, 'y': 0.01}, size_hint=(0.3, 0.1), halign='center', font_size=10,  valign='middle')
+        layout.add_widget(label8)
+
+        return layout
+
+if __name__ == '__main__':
+    MyKivyApp().run()
